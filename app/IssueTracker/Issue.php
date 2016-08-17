@@ -2,6 +2,7 @@
 
 namespace IssueTracker;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|Label[] labels
  * @property-read Status status
  * @property-read \Illuminate\Database\Eloquent\Collection|History[] histories
+ * @property-read \Illuminate\Database\Eloquent\Collection|User[] assignedUsers
  * @property-read \Illuminate\Database\Eloquent\Collection|Comment[] mentionByComments
  *
  * @property \Carbon\Carbon|null created_at
@@ -50,6 +52,11 @@ class Issue extends Model
     public function histories()
     {
         return $this->hasMany(History::class);
+    }
+
+    public function assignedUsers()
+    {
+        return $this->belongsToMany(User::class, 'assignments');
     }
 
     public function mentionByComments()

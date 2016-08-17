@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use IssueTracker\Comment;
+use IssueTracker\Issue;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 /**
@@ -23,6 +24,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|Role[] roles
  * @property-read \Illuminate\Database\Eloquent\Collection|Comment[] comments
+ * @property-read \Illuminate\Database\Eloquent\Collection|Issue[] assignedIssues
  * @property-read \Illuminate\Database\Eloquent\Collection|Comment[] mentionByComments
  *
  * @property \Carbon\Carbon|null created_at
@@ -71,6 +73,11 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function assignedIssues()
+    {
+        return $this->belongsToMany(Issue::class, 'assignments');
     }
 
     public function mentionByComments()
