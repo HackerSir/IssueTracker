@@ -22,14 +22,14 @@ class CreateLabelsTable extends Migration
         });
 
         // Create table for associating labels to issues (Many-to-Many)
-        Schema::create('label_issue', function (Blueprint $table) {
-            $table->integer('label_id')->unsigned();
+        Schema::create('issue_label', function (Blueprint $table) {
             $table->integer('issue_id')->unsigned();
-            $table->foreign('label_id')->references('id')->on('labels')
-                ->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('label_id')->unsigned();
             $table->foreign('issue_id')->references('id')->on('issues')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->primary(['label_id', 'issue_id']);
+            $table->foreign('label_id')->references('id')->on('labels')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->primary(['issue_id', 'label_id']);
         });
     }
 
