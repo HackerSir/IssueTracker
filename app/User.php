@@ -20,7 +20,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @property \Carbon\Carbon|null last_login_at
  * @property string last_login_ip
  *
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[]|null roles
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] roles
  *
  * @property \Carbon\Carbon|null created_at
  * @property \Carbon\Carbon|null updated_at
