@@ -16,7 +16,7 @@ class CreateIssuesTable extends Migration
         Schema::create('issues', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->integer('status_id')->unsigned()->unique();
+            $table->integer('status_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('status_id')->references('id')->on('statuses')->onUpdate('cascade')->onDelete('cascade');

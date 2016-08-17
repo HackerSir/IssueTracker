@@ -17,7 +17,7 @@ class CreateStatusesTable extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->integer('color_id')->unsigned()->unique();
+            $table->integer('color_id')->unsigned();
 
             $table->foreign('color_id')->references('id')->on('colors')->onUpdate('cascade')->onDelete('cascade');
         });
