@@ -22,6 +22,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @property string last_login_ip
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|Role[] roles
+ * @property-read \Illuminate\Database\Eloquent\Collection|Comment[] comments
  * @property-read \Illuminate\Database\Eloquent\Collection|Comment[] mentionByComments
  *
  * @property \Carbon\Carbon|null created_at
@@ -65,6 +66,11 @@ class User extends Authenticatable
     public function getIsConfirmedAttribute()
     {
         return !empty($this->confirm_at);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function mentionByComments()
