@@ -2,6 +2,7 @@
 
 namespace IssueTracker;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -13,7 +14,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string target_type
  * @property int target_id
  *
- * @property-read \IssueTracker\Issue|null issue
+ * @property-read Issue issue
+ * @property-read User user
+ * @property-read Status|User|Label target
+ *
  *
  * @property \Carbon\Carbon|null created_at
  * @property \Carbon\Carbon|null updated_at
@@ -32,5 +36,15 @@ class History extends Model
     public function issue()
     {
         return $this->belongsTo(Issue::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function target()
+    {
+        return $this->morphTo();
     }
 }

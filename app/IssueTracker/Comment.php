@@ -2,6 +2,7 @@
 
 namespace IssueTracker;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -12,7 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int issue_id
  * @property string content
  *
- * @property-read \IssueTracker\Issue|null issue
+ * @property-read Issue issue
+ * @property-read User author
  *
  * @property \Carbon\Carbon|null created_at
  * @property \Carbon\Carbon|null updated_at
@@ -33,5 +35,10 @@ class Comment extends Model
     public function issue()
     {
         return $this->belongsTo(Issue::class);
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
     }
 }

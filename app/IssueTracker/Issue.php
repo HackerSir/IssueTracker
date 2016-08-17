@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string title
  * @property int status_id
  *
- * @property-read \Illuminate\Database\Eloquent\Collection|\IssueTracker\Comment[]|null comments
- * @property-read \Illuminate\Database\Eloquent\Collection|\IssueTracker\Label[]|null labels
- * @property-read \IssueTracker\Status|null status
- * @property-read \Illuminate\Database\Eloquent\Collection|\IssueTracker\History[]|null histories
+ * @property-read \Illuminate\Database\Eloquent\Collection|Comment[] comments
+ * @property-read \Illuminate\Database\Eloquent\Collection|Label[] labels
+ * @property-read Status status
+ * @property-read \Illuminate\Database\Eloquent\Collection|History[] histories
  *
  * @property \Carbon\Carbon|null created_at
  * @property \Carbon\Carbon|null updated_at

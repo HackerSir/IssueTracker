@@ -2,6 +2,7 @@
 
 namespace IssueTracker;
 
+use App\Color;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -11,7 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string name
  * @property int color_id
  *
- * @property-read \Illuminate\Database\Eloquent\Collection|\IssueTracker\Issue[]|null issues
+ * @property-read \Illuminate\Database\Eloquent\Collection|Issue[] issues
+ * @property-read Color color
  *
  * @mixin \Eloquent
  */
@@ -32,5 +34,10 @@ class Label extends Model
     public function issues()
     {
         return $this->hasMany(Issue::class);
+    }
+
+    public function color()
+    {
+        return $this->belongsTo(Color::class);
     }
 }
