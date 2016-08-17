@@ -13,8 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|\IssueTracker\Issue[]|null issues
  *
- * @property \Carbon\Carbon|null created_at
- * @property \Carbon\Carbon|null updated_at
  * @mixin \Eloquent
  */
 class Label extends Model
@@ -27,6 +25,9 @@ class Label extends Model
 
     /* @var int $perPage 分頁時的每頁數量 */
     protected $perPage = 20;
+
+    /* @var bool $timestamps 是否要有時戳 */
+    public $timestamps = false;
 
     public function issues()
     {

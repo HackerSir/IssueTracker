@@ -18,4 +18,8 @@ class Color extends Model
     protected $fillable = [
         'name',
     ];
+
+    /* @var bool $timestamps 是否要有時戳 */
+    public $timestamps = false;
+
 }
