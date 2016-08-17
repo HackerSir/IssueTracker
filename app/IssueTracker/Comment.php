@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property-read Issue issue
  * @property-read User author
+ * @property-read \Illuminate\Database\Eloquent\Collection|User[] mentionUsers
+ * @property-read \Illuminate\Database\Eloquent\Collection|Issue[] mentionIssues
  *
  * @property \Carbon\Carbon|null created_at
  * @property \Carbon\Carbon|null updated_at
@@ -40,5 +42,15 @@ class Comment extends Model
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function mentionUsers()
+    {
+        return $this->morphedByMany(User::class, 'mentionables');
+    }
+
+    public function mentionIssues()
+    {
+        return $this->morphedByMany(Issue::class, 'mentionables');
     }
 }
