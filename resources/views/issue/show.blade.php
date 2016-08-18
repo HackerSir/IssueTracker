@@ -1,7 +1,7 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: vongola12324
- * Date: 2016/8/18
- * Time: 下午1:49
- */
+@extends('app')
+
+@section('content')
+    <div>
+        <h1 class="ui header">Issue Title <span style="color:grey;">#1</span></h1>
+    </div>
+@endsection
