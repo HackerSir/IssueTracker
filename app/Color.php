@@ -3,17 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use IssueTracker\Label;
-use IssueTracker\Status;
 
 /**
  * 顏色
  *
- * @property-read int id
- * @property string name
- *
- * @property-read \Illuminate\Database\Eloquent\Collection|Label[] labels
- * @property-read \Illuminate\Database\Eloquent\Collection|Status[] statuses
+ * @property-read string name
  *
  * @mixin \Eloquent
  */
@@ -24,17 +18,9 @@ class Color extends Model
         'name',
     ];
 
+    /* @var string $primaryKey 主鍵名稱 */
+    public $primaryKey = 'name';
+
     /* @var bool $timestamps 是否要有時戳 */
     public $timestamps = false;
-
-    public function labels()
-    {
-        return $this->hasMany(Label::class);
-    }
-
-    public function statuses()
-    {
-        return $this->hasMany(Status::class);
-    }
-
 }

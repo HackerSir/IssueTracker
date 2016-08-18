@@ -3,13 +3,10 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use IssueTracker\Comment;
-use IssueTracker\Issue;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 /**
  * 使用者
- *
  *
  * @property-read int id
  * @property string name
@@ -22,10 +19,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @property \Carbon\Carbon|null last_login_at
  * @property string last_login_ip
  *
- * @property-read \Illuminate\Database\Eloquent\Collection|Role[] roles
- * @property-read \Illuminate\Database\Eloquent\Collection|Comment[] comments
- * @property-read \Illuminate\Database\Eloquent\Collection|Issue[] assignedIssues
- * @property-read \Illuminate\Database\Eloquent\Collection|Comment[] mentionByComments
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] roles
  *
  * @property \Carbon\Carbon|null created_at
  * @property \Carbon\Carbon|null updated_at
@@ -68,20 +62,5 @@ class User extends Authenticatable
     public function getIsConfirmedAttribute()
     {
         return !empty($this->confirm_at);
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-    public function assignedIssues()
-    {
-        return $this->belongsToMany(Issue::class, 'assignments');
-    }
-
-    public function mentionByComments()
-    {
-        return $this->morphToMany(Comment::class, 'mentionables');
     }
 }
