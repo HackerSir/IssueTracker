@@ -4,17 +4,20 @@
 
 @section('css')
     <style>
-        @media only screen and (max-width: 767px){
+        @media only screen and (max-width: 767px) {
             #authorDropdown {
                 visibility: hidden;
             }
+
             #labelDropdown {
                 visibility: hidden;
             }
+
             #sortDropdown {
                 visibility: hidden;
             }
         }
+
         div.very.relaxed > div.item {
             padding-top: .85714286em !important;
             padding-bottom: .85714286em !important;
@@ -35,7 +38,9 @@
                 <div class="column">
                     <i class="grey huge warning circle icon"></i>
                     <h2 class="ui header">Welcome to Issues!</h2>
-                    <p style="font-size: 1.1em">Issues are used to track todos, ask quections, and more. As issues are created, they’ll appear here in a searchable and filterable list. To get started, you should <a href="{{ route('issue.create') }}">create an issue</a>.</p>
+                    <p style="font-size: 1.1em">Issues are used to track todos, ask quections, and more. As issues are
+                        created, they’ll appear here in a searchable and filterable list. To get started, you should <a
+                            href="{{ route('issue.create') }}">create an issue</a>.</p>
                 </div>
             </div>
         </div>
@@ -52,8 +57,12 @@
                             <i class="green check circle icon"></i>
                         @endif
                         <div class="content">
-                            <a href="{{ route('issue.show', ['issue' => $issue]) }}" class="header">{{ $issue->title }}</a>
-                            <div class="description">#{{ $issue->id }} @if($issue->status()->name == 'Opened') opened @elseif($issue->status()->name == 'Reopened') reopened  @else closed @endif 2 days ago by NAME</div>
+                            <a href="{{ route('issue.show', ['issue' => $issue]) }}"
+                               class="header">{{ $issue->title }}</a>
+                            <div class="description">#{{ $issue->id }} @if($issue->status()->name == 'Opened')
+                                    opened @elseif($issue->status()->name == 'Reopened') reopened  @else closed @endif 2
+                                days ago by NAME
+                            </div>
                         </div>
                     </div>
                 @endforeach

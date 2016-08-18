@@ -358,8 +358,8 @@
             </div>
 
             <p class="ui center aligned segment" style="border-left: none;border-bottom: none;border-right: none;">
-                If you want to get more information or read more, here is our website: <a
-                        href="http://www.istm.fcu.edu.tw/">http://www.istm.fcu.edu.tw/</a><br>
+                If you want to get more information or read more, here is our website:
+                <a href="http://www.istm.fcu.edu.tw/">http://www.istm.fcu.edu.tw/</a><br>
                 Feng Chia University International School of Technology and Management<br>
                 逢甲大學國際科技與管理學院<br>
             </p>
