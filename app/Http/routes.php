@@ -38,6 +38,8 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::get('edit', 'ProfileController@getEditProfile')->name('profile.edit');
         Route::put('update', 'ProfileController@updateProfile')->name('profile.update');
     });
+
+    Route::resource('issue', 'IssueController');
 });
 
 //會員系統
@@ -65,5 +67,5 @@ Route::group(['namespace' => 'Auth'], function () {
 
 //首頁
 Route::get('/', function () {
-    return view('index');
+    return redirect(route('issue.index'));
 })->name('index');
