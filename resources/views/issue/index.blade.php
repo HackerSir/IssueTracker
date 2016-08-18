@@ -23,7 +23,9 @@
 @endsection
 
 @section('content')
-    <div class="ui right aligned inverted green button"><i class="plus icon"></i>New Issue</div>
+    <a href="{{ route('issue.create') }}" class="ui right aligned inverted green button">
+        <i class="plus icon"></i>New Issue
+    </a>
     <div class="ui top attached grey segment" style="padding: 0;">
         @include('issue.menu')
     </div>
