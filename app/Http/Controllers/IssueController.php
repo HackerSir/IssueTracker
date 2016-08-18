@@ -27,7 +27,7 @@ class IssueController extends Controller
      */
     public function create()
     {
-        //
+        return view('issue.create');
     }
 
     /**
@@ -38,51 +38,40 @@ class IssueController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // TODO: store issue
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Issue  $issue
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Issue $issue)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return view('issue.show', compact('issue'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param Issue $issue
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Issue $issue)
     {
-        //
+        // TODO: update with ajax
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Issue $issue
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Issue $issue)
     {
-        //
+        // TODO: delete issue
     }
 }
