@@ -16,9 +16,9 @@ class CreateLabelsTable extends Migration
         Schema::create('labels', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->integer('color_id')->unsigned();
+            $table->string('color')->default('grey');
 
-            $table->foreign('color_id')->references('id')->on('colors')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('color')->references('name')->on('colors')->onUpdate('cascade')->onDelete('cascade');
         });
 
         // Create table for associating labels to issues (Many-to-Many)

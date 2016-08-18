@@ -17,15 +17,15 @@ class CreateStatusesTable extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->integer('color_id')->unsigned();
+            $table->string('color')->default('grey');
 
-            $table->foreign('color_id')->references('id')->on('colors')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('color')->references('name')->on('colors')->onUpdate('cascade')->onDelete('cascade');
         });
 
         // Create statuses
-        Status::create(['name' => 'Opened', 'color_id' => '1']);
-        Status::create(['name' => 'Reopened', 'color_id' => '2']);
-        Status::create(['name' => 'Closed', 'color_id' => '5']);
+        Status::create(['name' => 'Opened', 'color' => 'red']);
+        Status::create(['name' => 'Reopened', 'color_id' => 'orange']);
+        Status::create(['name' => 'Closed', 'color_id' => 'green']);
     }
 
     /**
