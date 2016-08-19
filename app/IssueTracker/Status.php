@@ -47,6 +47,7 @@ class Status extends Model
                 return '';
         }
     }
+
     public function getLabelIconAttribute()
     {
         switch ($this->name) {
