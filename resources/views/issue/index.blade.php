@@ -5,15 +5,7 @@
 @section('css')
     <style>
         @media only screen and (max-width: 767px) {
-            #authorDropdown {
-                visibility: hidden;
-            }
-
-            #labelDropdown {
-                visibility: hidden;
-            }
-
-            #sortDropdown {
+            .browse.item {
                 visibility: hidden;
             }
         }
@@ -21,6 +13,10 @@
         div.very.relaxed > div.item {
             padding-top: .85714286em !important;
             padding-bottom: .85714286em !important;
+        }
+
+        .ui.dropdown .menu > .header {
+            text-transform: none;
         }
     </style>
 @endsection
@@ -69,17 +65,4 @@
         @include('components.pagination-bar', ['models' => $issues])
     @endif
 
-@endsection
-
-@section('js')
-    <script>
-        $('.browse.item').each(function () {
-            $(this).popup({
-                popup: $('#' + $(this).data('target')),
-                inline: true,
-                position: 'bottom right',
-                on: 'click'
-            });
-        });
-    </script>
 @endsection
