@@ -1,28 +1,32 @@
 <div class="ui secondary menu" style="margin: 0;">
     {{-- 狀態清單 --}}
     @foreach(\IssueTracker\Status::all() as $status)
-        <a href="#" class="item">{!! $status->labelIcon !!}{{ $status->name }}</a>
+        <a href="#" class="item">{!! $status->icon !!}{{ $status->name }}</a>
     @endforeach
     {{-- 篩選選單 --}}
-    <a href="#" class="right browse item" id="authorDropdown">Author <i class="dropdown icon"></i></a>
+    <a href="#" class="right browse item" id="participantDropdown">Participant <i class="dropdown icon"></i></a>
     <a href="#" class="browse item" id="labelDropdown">Label <i class="dropdown icon"></i></a>
     <a href="#" class="browse item" id="sortDropdown">Sort <i class="dropdown icon"></i></a>
 </div>
-{{-- 作者 --}}
-<div class="ui popup transition hidden" id="authorPopup">
+{{-- 參與 --}}
+<div class="ui popup transition hidden" id="participantPopup">
     <div class="ui link list">
-        {{-- FIXME: 應過濾，僅顯示有發表過的使用者 --}}
-        @foreach(\App\User::all() as $user)
+        {{-- FIXME: 應過濾，僅顯示有參與過的使用者 --}}
+        @forelse(\App\User::all() as $user)
             <a class="item">{{ $user->name }}</a>
-        @endforeach
+        @empty
+            <a href="javascript:void(0)" class="item" disabled>（None）</a>
+        @endforelse
     </div>
 </div>
 {{-- 標籤 --}}
 <div class="ui popup transition hidden" id="labelPopup">
     <div class="ui link list">
-        @foreach(\IssueTracker\Label::all() as $label)
+        @forelse(\IssueTracker\Label::all() as $label)
             <a class="item">{{ $label->name }}</a>
-        @endforeach
+        @empty
+            <a href="javascript:void(0)" class="item" disabled>（None）</a>
+        @endforelse
     </div>
 </div>
 {{-- 排序 --}}

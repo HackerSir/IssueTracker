@@ -73,8 +73,8 @@
 
 @section('js')
     <script>
-        $('#authorDropdown').popup({
-            popup: $('#authorPopup'),
+        $('#participantDropdown').popup({
+            popup: $('#participantPopup'),
             inline: true,
             position: 'bottom right',
             on: 'click'

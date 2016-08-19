@@ -47,18 +47,4 @@ class Status extends Model
                 return '';
         }
     }
-
-    public function getLabelIconAttribute()
-    {
-        switch ($this->name) {
-            case 'Opened':
-                return '<i class="red warning icon"></i>';
-            case 'Reopened':
-                return '<i class="orange warning icon"></i>';
-            case 'Closed':
-                return '<i class="green check icon"></i>';
-            default:
-                return '';
-        }
-    }
 }
