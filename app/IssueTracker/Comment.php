@@ -34,6 +34,9 @@ class Comment extends Model
     /* @var int $perPage 分頁時的每頁數量 */
     protected $perPage = 20;
 
+    /* @var array update後，更新關聯的updated_at */
+    protected $touches = ['issue'];
+
     public function issue()
     {
         return $this->belongsTo(Issue::class);
