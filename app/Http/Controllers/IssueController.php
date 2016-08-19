@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use IssueTracker\Issue;
 
 class IssueController extends Controller
@@ -17,6 +15,7 @@ class IssueController extends Controller
     public function index()
     {
         $issues = Issue::paginate();
+
         return view('issue.index', compact('issues'));
     }
 

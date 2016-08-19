@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use IssueTracker\Comment;
 
 class CommentController extends Controller

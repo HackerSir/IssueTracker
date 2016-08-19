@@ -31,5 +31,4 @@ class Label extends Model
     {
         return $this->hasMany(Issue::class);
     }
-
 }
