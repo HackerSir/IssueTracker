@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|Issue[] issues
  * @property-read string icon
+ * @property-read string labelIcon
  *
  * @mixin \Eloquent
  */
@@ -42,6 +43,19 @@ class Status extends Model
                 return '<i class="orange warning sign icon"></i>';
             case 'Closed':
                 return '<i class="green check circle icon"></i>';
+            default:
+                return '';
+        }
+    }
+    public function getLabelIconAttribute()
+    {
+        switch ($this->name) {
+            case 'Opened':
+                return '<i class="red warning icon"></i>';
+            case 'Reopened':
+                return '<i class="orange warning icon"></i>';
+            case 'Closed':
+                return '<i class="green check icon"></i>';
             default:
                 return '';
         }
