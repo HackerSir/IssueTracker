@@ -49,9 +49,9 @@
             <div class="ui large very relaxed selection divided list">
                 @foreach($issues as $issue)
                     <div class="item">
-                        @if($issue->status()->name == 'Opened')
+                        @if($issue->status->name == 'Opened')
                             <i class="red warning sign icon"></i>
-                        @elseif($issue->status()->name == 'Reopened')
+                        @elseif($issue->status->name == 'Reopened')
                             <i class="orange warning sign icon"></i>
                         @else
                             <i class="green check circle icon"></i>
@@ -59,8 +59,8 @@
                         <div class="content">
                             <a href="{{ route('issue.show', ['issue' => $issue]) }}"
                                class="header">{{ $issue->title }}</a>
-                            <div class="description">#{{ $issue->id }} @if($issue->status()->name == 'Opened')
-                                    opened @elseif($issue->status()->name == 'Reopened') reopened  @else closed @endif 2
+                            <div class="description">#{{ $issue->id }} @if($issue->status->name == 'Opened')
+                                    opened @elseif($issue->status->name == 'Reopened') reopened  @else closed @endif 2
                                 days ago by NAME
                             </div>
                         </div>
