@@ -73,23 +73,13 @@
 
 @section('js')
     <script>
-        $('#participantDropdown').popup({
-            popup: $('#participantPopup'),
-            inline: true,
-            position: 'bottom right',
-            on: 'click'
-        });
-        $('#labelDropdown').popup({
-            popup: $('#labelPopup'),
-            inline: true,
-            position: 'bottom right',
-            on: 'click'
-        });
-        $('#sortDropdown').popup({
-            popup: $('#sortPopup'),
-            inline: true,
-            position: 'bottom right',
-            on: 'click'
+        $('.browse.item').each(function () {
+            $(this).popup({
+                popup: $('#' + $(this).data('target')),
+                inline: true,
+                position: 'bottom right',
+                on: 'click'
+            });
         });
     </script>
 @endsection
