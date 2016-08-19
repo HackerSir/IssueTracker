@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use IssueTracker\Issue;
+use IssueTracker\Label;
 
 class IssueController extends Controller
 {
@@ -15,8 +17,13 @@ class IssueController extends Controller
     public function index()
     {
         $issues = Issue::paginate();
+        //參與者
+        //FIXME: 應過濾，僅顯示有參與過的使用者
+        $participants = User::all();
+        //標籤
+        $labels = Label::all();
 
-        return view('issue.index', compact('issues'));
+        return view('issue.index', compact('issues', 'participants', 'labels'));
     }
 
     /**
@@ -32,7 +39,7 @@ class IssueController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -43,7 +50,7 @@ class IssueController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Issue  $issue
+     * @param  Issue $issue
      * @return \Illuminate\Http\Response
      */
     public function show(Issue $issue)
