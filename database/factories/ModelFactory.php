@@ -29,3 +29,26 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'last_login_ip'  => $ip,
     ];
 });
+
+$factory->define(\IssueTracker\Issue::class, function (Faker\Generator $faker) {
+    $dataTime = $faker->dateTime;
+
+    return [
+        'title'      => $faker->realText($faker->numberBetween(10, 20)),
+        'status_id'  => $faker->randomElement(\IssueTracker\Status::pluck('id')->toArray()),
+        'created_at' => $dataTime,
+        'updated_at' => $dataTime,
+    ];
+});
+
+$factory->define(\IssueTracker\Comment::class, function (Faker\Generator $faker) {
+    $dataTime = $faker->dateTime;
+
+    return [
+        'author_id'  => $faker->randomElement(\App\User::pluck('id')->toArray()),
+        'issue_id'   => $faker->randomElement(\IssueTracker\Issue::pluck('id')->toArray()),
+        'content'    => $faker->realText,
+        'created_at' => $dataTime,
+        'updated_at' => $dataTime,
+    ];
+});
