@@ -16,7 +16,7 @@ class IssueController extends Controller
      */
     public function index()
     {
-        $issues = Issue::paginate();
+        $issues = Issue::with('status', 'comments')->paginate();
         //參與者（僅顯示有參與過的使用者）
         $participants = User::has('comments', '>', 0)->get();
         //標籤

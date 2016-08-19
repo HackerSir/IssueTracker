@@ -47,6 +47,13 @@
             <div class="ui large very relaxed selection divided list">
                 @foreach($issues as $issue)
                     <div class="item">
+                        {{-- Comment數量（不含主樓） --}}
+                        @if($issue->comments->count() > 1)
+                            <div class="right floated content">
+                                <i class="talk outline icon"></i>
+                                {{ $issue->comments->count() - 1 }}
+                            </div>
+                        @endif
                         {!! $issue->status->icon !!}
                         <div class="content">
                             <a href="{{ route('issue.show', $issue) }}" class="header">{{ $issue->title }}</a>
