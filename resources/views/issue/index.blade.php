@@ -66,11 +66,7 @@
                 @endforeach
             </div>
         </div>
-        @if($issues->lastPage() > 1)
-            <div class="ui center aligned attached segment" style="border: none; background: none">
-                {!! (new Landish\Pagination\SemanticUI($issues))->render() !!}
-            </div>
-        @endif
+        @include('components.pagination-bar', ['models' => $issues])
     @endif
 
 @endsection
