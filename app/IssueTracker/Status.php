@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string color
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|Issue[] issues
+ * @property-read string icon
  *
  * @mixin \Eloquent
  */
@@ -32,4 +33,17 @@ class Status extends Model
         return $this->hasMany(Issue::class);
     }
 
+    public function getIconAttribute()
+    {
+        switch ($this->name) {
+            case 'Opened':
+                return '<i class="red warning sign icon"></i>';
+            case 'Reopened':
+                return '<i class="orange warning sign icon"></i>';
+            case 'Closed':
+                return '<i class="green check circle icon"></i>';
+            default:
+                return '';
+        }
+    }
 }

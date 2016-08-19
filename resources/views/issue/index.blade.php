@@ -38,9 +38,11 @@
                 <div class="column">
                     <i class="grey huge warning circle icon"></i>
                     <h2 class="ui header">Welcome to Issues!</h2>
-                    <p style="font-size: 1.1em">Issues are used to track todos, ask quections, and more. As issues are
-                        created, they’ll appear here in a searchable and filterable list. To get started, you should <a
-                            href="{{ route('issue.create') }}">create an issue</a>.</p>
+                    <p style="font-size: 1.1em">
+                        Issues are used to track todos, ask quections, and more. As issues are
+                        created, they’ll appear here in a searchable and filterable list. To get started, you should
+                        <a href="{{ route('issue.create') }}">create an issue</a>.
+                    </p>
                 </div>
             </div>
         </div>
@@ -49,19 +51,15 @@
             <div class="ui large very relaxed selection divided list">
                 @foreach($issues as $issue)
                     <div class="item">
-                        @if($issue->status->name == 'Opened')
-                            <i class="red warning sign icon"></i>
-                        @elseif($issue->status->name == 'Reopened')
-                            <i class="orange warning sign icon"></i>
-                        @else
-                            <i class="green check circle icon"></i>
-                        @endif
+                        {!! $issue->status->icon !!}
                         <div class="content">
-                            <a href="{{ route('issue.show', ['issue' => $issue]) }}"
-                               class="header">{{ $issue->title }}</a>
-                            <div class="description">#{{ $issue->id }} @if($issue->status->name == 'Opened')
-                                    opened @elseif($issue->status->name == 'Reopened') reopened  @else closed @endif 2
-                                days ago by NAME
+                            <a href="{{ route('issue.show', $issue) }}" class="header">{{ $issue->title }}</a>
+                            <div class="description">#{{ $issue->id }}
+                                {{ strtolower($issue->status->name) }}
+                                {{-- TODO: 最後一次狀態修改時間 --}}
+                                2 days ago
+                                {{-- TODO: 最後一次修改狀態者 --}}
+                                by NAME
                             </div>
                         </div>
                     </div>
