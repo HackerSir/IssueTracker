@@ -21,7 +21,7 @@
                 @foreach(\App\User::all() as $user)
                     {{-- TODO: 過濾 --}}
                     <div class="item">
-                        <div class="ui red empty circular label"></div>
+                        {{ Html::image(Gravatar::src($user->email, 80), null, ['class'=>'ui tiny avatar image']) }}
                         {{ $user->name }}
                     </div>
                 @endforeach
