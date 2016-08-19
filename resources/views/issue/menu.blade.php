@@ -23,7 +23,7 @@
             {{-- TODO: 過濾 --}}
             <a class="item">{{ $user->name }}</a>
         @empty
-            <a href="javascript:void(0)" class="item" disabled>（None）</a>
+            <a href="javascript:void(0)" class="item" disabled>(None)</a>
         @endforelse
     </div>
 </div>
@@ -34,7 +34,7 @@
             {{-- TODO: 過濾 --}}
             <a class="item">{{ $label->name }}</a>
         @empty
-            <a href="javascript:void(0)" class="item" disabled>（None）</a>
+            <a href="javascript:void(0)" class="item" disabled>(None)</a>
         @endforelse
     </div>
 </div>
