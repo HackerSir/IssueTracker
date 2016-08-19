@@ -40,7 +40,7 @@ class CreateLabelsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('label_issue');
+        Schema::drop('issue_label');
         Schema::drop('labels');
     }
 }
