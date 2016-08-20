@@ -31,6 +31,7 @@ class LabelController extends Controller
                 'msg'    => 'Label create failed!',
             ];
         }
+
         return \Response::json($response);
     }
 
@@ -58,6 +59,7 @@ class LabelController extends Controller
                 'msg'    => 'Label delete failed!',
             ];
         }
+
         return \Response::json($response);
     }
 }
