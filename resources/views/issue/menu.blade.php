@@ -3,6 +3,7 @@
     @foreach(\IssueTracker\Status::all() as $status)
         <a href="javascript:void(0)" class="item">
             {!! $status->icon !!}
+            {{-- FIXME: 應顯示根據 Filter Pattern 過濾後的數量 --}}
             {{ $status->issues->count() }}
             {{ $status->name }}
         </a>
