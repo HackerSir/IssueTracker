@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use IssueTracker\Label;
 
 class CreateLabelsTable extends Migration
 {
@@ -31,6 +32,13 @@ class CreateLabelsTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->primary(['issue_id', 'label_id']);
         });
+
+        // Create some sample label
+        Label::create(['name' => 'Important', 'color' => 'red']);
+        Label::create(['name' => 'Invalid', 'color' => 'grey']);
+        Label::create(['name' => 'Help wanted', 'color' => 'green']);
+        Label::create(['name' => 'Question', 'color' => 'pink']);
+        Label::create(['name' => 'Task', 'color' => 'blue']);
     }
 
     /**
