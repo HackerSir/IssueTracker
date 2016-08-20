@@ -83,6 +83,11 @@ class FilterPatternService
                     break;
             }
         }
+        //關鍵字
+        if (isset($patternData['keyword']) && count($patternData['keyword']) > 0) {
+            $keywords = $patternData['keyword'];
+            $queryBuilder->where('title', 'like', '%' . implode('%', $keywords) . '%');
+        }
 
         return $queryBuilder;
     }

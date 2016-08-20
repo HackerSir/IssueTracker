@@ -35,29 +35,34 @@ class FilterPattern
         //TODO: 解析Pattern
         //依空白分割
         $tokens = preg_split("/[\s]+/", $patternString);
-        foreach ($tokens as $token) {
-            //token類型與參數
-            $type = '';
-            $argument = '';
-            //是否為特殊token
-            $isValidType = str_contains($token, static::$validTokenTypes);
-            if ($isValidType) {
-                //類型與參數
-                list($type, $argument) = explode(':', $token, 2);
-                //類型轉小寫
-                $type = strtolower($type);
-            }
-            //有效類型，且參數不為空
-            if ($isValidType && !empty($argument)) {
-                //特殊token
-                //TODO: 根據類型處理
-                switch ($type) {
-                    case 'sort':
-                        //排序
-                        $this->updateSort($argument);
+        if (is_array($tokens)) {
+            //有tokens才處理
+            foreach ($tokens as $token) {
+                //逐一處理每個token
+                //token類型與參數
+                $type = '';
+                $argument = '';
+                //是否為特殊token
+                $isValidType = str_contains($token, static::$validTokenTypes);
+                if ($isValidType) {
+                    //類型與參數
+                    list($type, $argument) = explode(':', $token, 2);
+                    //類型轉小寫
+                    $type = strtolower($type);
                 }
-            } else {
-                //非特殊token，即為關鍵字
+                //有效類型，且參數不為空
+                if ($isValidType && !empty($argument)) {
+                    //特殊token
+                    //TODO: 根據類型處理
+                    switch ($type) {
+                        case 'sort':
+                            //排序
+                            $this->updateSort($argument);
+                    }
+                } else {
+                    //非特殊token，即為關鍵字
+                    $this->data['keyword'][] = $token;
+                }
             }
         }
 
