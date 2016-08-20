@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property-read int id
  * @property string name
- * @property string color_id
+ * @property string color
  *
  * @property-read \Illuminate\Database\Eloquent\Collection|Issue[] issues
  *

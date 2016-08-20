@@ -39,6 +39,10 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::put('update', 'ProfileController@updateProfile')->name('profile.update');
     });
 
+    Route::get('issue/labels', 'LabelController@getIndex')->name('issue.label');
+    Route::post('issue/labels/store', 'LabelController@postStore');
+    Route::post('issue/labels/update', 'LabelController@postUpdate');
+    Route::post('issue/labels/destroy', 'LabelController@postDestroy');
     Route::resource('issue', 'IssueController');
 });
 

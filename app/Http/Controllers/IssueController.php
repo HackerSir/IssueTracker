@@ -54,7 +54,8 @@ class IssueController extends Controller
      */
     public function show(Issue $issue)
     {
-        return view('issue.show', compact('issue'));
+        $labels = Label::all();
+        return view('issue.show', compact(['issue', 'labels']));
     }
 
     /**
