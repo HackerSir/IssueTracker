@@ -13,7 +13,7 @@ class FilterPatternService
      *
      * @param Request $request
      */
-    public function updatePattern(Request $request)
+    public function renewPattern(Request $request)
     {
         $patternString = $request->get('filterPattern');
         //建立Pattern
@@ -24,13 +24,37 @@ class FilterPatternService
     }
 
     /**
+     * @param array $data
+     */
+    public function updatePattern(array $data)
+    {
+        //取出pattern
+        $pattern = $this->getPattern();
+        //更新
+        $pattern->update($data);
+    }
+
+    /**
      * 從Session中取出Pattern字串
      *
      * @return string
      */
+    public function getPatternString()
+    {
+        $patternString = session('filterPattern');
+
+        return $patternString;
+    }
+
+    /**
+     * 從Session中取出Pattern
+     *
+     * @return FilterPattern
+     */
     public function getPattern()
     {
-        $pattern = session('filterPattern');
+        $patternString = $this->getPatternString();
+        $pattern = new FilterPattern($patternString);
 
         return $pattern;
     }
@@ -38,16 +62,13 @@ class FilterPatternService
     /**
      * 將Pattern套用給queryBuilder
      *
-     * @param $queryBuilder
+     * @param Builder|\Eloquent $queryBuilder
      * @return mixed
      */
     public function applyToQueryBuilder($queryBuilder)
     {
-        /* @var Builder $queryBuilder */
-        //取出pattern字串
-        $patternString = session('filterPattern');
-        //建立Pattern
-        $pattern = new FilterPattern($patternString);
+        //取出pattern
+        $pattern = $this->getPattern();
         $patternData = $pattern->data;
 
         // TODO: 根據Pattern資料修改QueryBuilder

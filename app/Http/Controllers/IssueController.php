@@ -31,11 +31,19 @@ class IssueController extends Controller
      */
     public function index()
     {
+        //若GET參數包含update
+        if (request()->exists('update')) {
+            //更新pattern
+            $this->filterPatternService->updatePattern(request()->all());
+
+            //重新導向
+            return redirect()->route('issue.index');
+        }
         $queryBuilder = Issue::with('status', 'comments');
         //套用Filter Pattern
         $queryBuilder = $this->filterPatternService->applyToQueryBuilder($queryBuilder);
         //取出Filter Pattern
-        $filterPattern = $this->filterPatternService->getPattern();
+        $filterPattern = $this->filterPatternService->getPatternString();
         //分頁並取出結果
         $issues = $queryBuilder->paginate();
         //參與者（僅顯示有參與過的使用者）
@@ -112,7 +120,7 @@ class IssueController extends Controller
     public function updateFilterPattern(Request $request)
     {
         //Update pattern of filter
-        $this->filterPatternService->updatePattern($request);
+        $this->filterPatternService->renewPattern($request);
 
         return redirect()->route('issue.index');
     }

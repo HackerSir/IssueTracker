@@ -17,7 +17,7 @@ class FilterPattern
     protected $pattern = '';
     /* @var array 資料，以陣列儲存各種條件 */
     protected $data = [
-        'keyword' => '',
+        'keyword' => [],
         'sort'    => 'created',
         'desc'    => true,
     ];
@@ -25,14 +25,19 @@ class FilterPattern
     /**
      * 根據Pattern字串建立Pattern
      *
-     * @param $pattern
+     * @param $patternString
      */
-    public function __construct($pattern)
+    public function __construct($patternString)
     {
-        //TODO: 處理Pattern
+        //TODO: 解析Pattern
 
         //將處理完的Pattern存入屬性
-        $this->pattern = $pattern;
+        $this->pattern = $patternString;
+    }
+
+    public function update(array $data)
+    {
+        //TODO: 更新Pattern
     }
 
     /**
