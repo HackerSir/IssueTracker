@@ -75,7 +75,7 @@ class FilterPatternService
         //排序
         if (isset($patternData['sort']) && isset($patternData['desc'])) {
             $sort = $patternData['sort'];
-            $desc = ((bool)$patternData['desc']) ? 'desc' : 'asc';
+            $desc = ((bool) $patternData['desc']) ? 'desc' : 'asc';
             //TODO: 不同類型的排序
             switch ($sort) {
                 case 'created':
