@@ -1,7 +1,11 @@
 <div class="ui secondary menu" style="margin: 0;">
     {{-- 狀態清單 --}}
     @foreach(\IssueTracker\Status::all() as $status)
-        <a href="javascript:void(0)" class="item">{!! $status->icon !!}{{ $status->name }}</a>
+        <a href="javascript:void(0)" class="item">
+            {!! $status->icon !!}
+            {{ $status->issues->count() }}
+            {{ $status->name }}
+        </a>
     @endforeach
     {{-- 把剩下的東西推到右邊 --}}
     <div class="right item"></div>
