@@ -5,14 +5,12 @@ namespace App\IssueTracker;
 /**
  * Class FilterPattern
  *
- * @package App\IssueTracker
  *
  * @property-read string pattern 轉Pattern字串
  * @property-read array data 資料
  */
 class FilterPattern
 {
-
     /* @var string Pattern字串 */
     protected $pattern = '';
     /* @var array 資料，以陣列儲存各種條件 */
