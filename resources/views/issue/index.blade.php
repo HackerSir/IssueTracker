@@ -29,10 +29,11 @@
     {{-- 過濾器 --}}
     <div style="display: inline-block">
         {!! SemanticForm::open()->action(route('issue.updateFilterPattern')) !!}
-        {!! SemanticForm::input('filterPattern', $filterPattern)->appendIcon('search')->placeholder('Search all issues') !!}
+        {{-- FIXME: 輸入框需要更寬 --}}
+        {!! SemanticForm::input('filterPattern', $filterPattern->pattern)->prependIcon('search')->placeholder('Search all issues') !!}
         {!! SemanticForm::close() !!}
     </div>
-    @if($filterPattern)
+    @if($filterPattern->pattern)
         <div style="display: inline-block">
             {!! SemanticForm::open()->action(route('issue.updateFilterPattern')) !!}
             {!! SemanticForm::hidden('filterPattern','') !!}

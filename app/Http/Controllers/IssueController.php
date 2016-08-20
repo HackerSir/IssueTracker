@@ -44,7 +44,7 @@ class IssueController extends Controller
         //套用Filter Pattern
         $queryBuilder = $this->filterPatternService->applyToQueryBuilder($queryBuilder);
         //取出Filter Pattern
-        $filterPattern = $this->filterPatternService->getPatternString();
+        $filterPattern = $this->filterPatternService->getPattern();
         //分頁並取出結果
         $issues = $queryBuilder->paginate();
 
