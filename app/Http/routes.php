@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::post('issue/labels/store', 'LabelController@postStore');
     Route::post('issue/labels/update', 'LabelController@postUpdate');
     Route::post('issue/labels/destroy', 'LabelController@postDestroy');
+    Route::post('issue/updateFilterPattern', 'IssueController@updateFilterPattern')->name('issue.updateFilterPattern');
     Route::resource('issue', 'IssueController');
 });
 

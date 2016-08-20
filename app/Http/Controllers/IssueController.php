@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\FilterPatternService;
 use App\User;
 use Illuminate\Http\Request;
 use IssueTracker\Issue;
@@ -10,19 +11,39 @@ use IssueTracker\Label;
 class IssueController extends Controller
 {
     /**
+     * @var FilterPatternService
+     */
+    private $filterPatternService;
+
+    /**
+     * IssueController constructor.
+     * @param FilterPatternService $filterPatternService
+     */
+    public function __construct(FilterPatternService $filterPatternService)
+    {
+        $this->filterPatternService = $filterPatternService;
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $issues = Issue::with('status', 'comments')->paginate();
+        $queryBuilder = Issue::with('status', 'comments');
+        //套用Filter Pattern
+        $queryBuilder = $this->filterPatternService->applyToQueryBuilder($queryBuilder);
+        //取出Filter Pattern
+        $filterPattern = $this->filterPatternService->getPattern();
+        //分頁並取出結果
+        $issues = $queryBuilder->paginate();
         //參與者（僅顯示有參與過的使用者）
         $participants = User::has('comments', '>', 0)->get();
         //標籤
         $labels = Label::all();
 
-        return view('issue.index', compact('issues', 'participants', 'labels'));
+        return view('issue.index', compact('issues', 'participants', 'labels', 'filterPattern'));
     }
 
     /**
@@ -80,5 +101,19 @@ class IssueController extends Controller
     public function destroy(Issue $issue)
     {
         // TODO: delete issue
+    }
+
+    /**
+     * Update pattern of filter
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateFilterPattern(Request $request)
+    {
+        //Update pattern of filter
+        $this->filterPatternService->updatePattern($request);
+
+        return redirect()->route('issue.index');
     }
 }

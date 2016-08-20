@@ -22,12 +22,31 @@
 @endsection
 
 @section('content')
+    {{-- 按鈕 --}}
     <a href="{{ route('issue.create') }}" class="ui right aligned inverted green button">
         <i class="plus icon"></i>New Issue
     </a>
+    {{-- 過濾器 --}}
+    <div style="display: inline-block">
+        {!! SemanticForm::open()->action(route('issue.updateFilterPattern')) !!}
+        {!! SemanticForm::input('filterPattern', $filterPattern)->appendIcon('search')->placeholder('Search all issues') !!}
+        {!! SemanticForm::close() !!}
+    </div>
+    @if($filterPattern)
+        <div style="display: inline-block">
+            {!! SemanticForm::open()->action(route('issue.updateFilterPattern')) !!}
+            {!! SemanticForm::hidden('filterPattern','') !!}
+            <button type="submit" class="ui icon button" title="Clear current search query, filters, and sorts">
+                <i class="remove icon"></i>
+            </button>
+            {!! SemanticForm::close() !!}
+        </div>
+    @endif
+    {{-- 選單 --}}
     <div class="ui top attached grey segment" style="padding: 0;">
         @include('issue.menu')
     </div>
+
     @if($issues->total() == 0)
         <div class="ui very padded attached segment" style="height: 50vh;background-color: #f0f0f0">
             <div class="ui middle aligned center aligned grid" style="height: 100%">
