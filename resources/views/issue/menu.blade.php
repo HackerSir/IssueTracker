@@ -57,8 +57,8 @@
             <div class="header">Sort by</div>
             <div class="scrolling menu">
                 {{-- TODO: 排序 --}}
-                <a class="item">Newest</a>
-                <a class="item">Oldest</a>
+                <a href="{{ route('issue.index', ['update', 'sort' => 'created-desc']) }}" class="item">Newest</a>
+                <a href="{{ route('issue.index', ['update', 'sort' => 'created-asc']) }}" class="item">Oldest</a>
                 <a class="item">Most Comment</a>
                 <a class="item">Least Comment</a>
                 <a class="item">Recently Update</a>

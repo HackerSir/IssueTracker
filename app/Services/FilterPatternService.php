@@ -18,9 +18,8 @@ class FilterPatternService
         $patternString = $request->get('filterPattern');
         //建立Pattern
         $pattern = new FilterPattern($patternString);
-        $patternString = $pattern->pattern;
         //暫存至Session
-        session(['filterPattern' => $patternString]);
+        session(['filterPattern' => $pattern->pattern]);
     }
 
     /**
@@ -32,6 +31,8 @@ class FilterPatternService
         $pattern = $this->getPattern();
         //更新
         $pattern->update($data);
+        //暫存至Session
+        session(['filterPattern' => $pattern->pattern]);
     }
 
     /**
@@ -70,8 +71,18 @@ class FilterPatternService
         //取出pattern
         $pattern = $this->getPattern();
         $patternData = $pattern->data;
-
         // TODO: 根據Pattern資料修改QueryBuilder
+        //排序
+        if (isset($patternData['sort']) && isset($patternData['desc'])) {
+            $sort = $patternData['sort'];
+            $desc = ((bool)$patternData['desc']) ? 'desc' : 'asc';
+            //TODO: 不同類型的排序
+            switch ($sort) {
+                case 'created':
+                    $queryBuilder->orderBy('created_at', $desc);
+                    break;
+            }
+        }
 
         return $queryBuilder;
     }
