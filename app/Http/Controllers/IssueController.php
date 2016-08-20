@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\FilterPatternService;
 use App\User;
+use DB;
 use Illuminate\Http\Request;
 use IssueTracker\Issue;
 use IssueTracker\Label;
@@ -46,12 +47,24 @@ class IssueController extends Controller
         $filterPattern = $this->filterPatternService->getPatternString();
         //分頁並取出結果
         $issues = $queryBuilder->paginate();
+
+        //計算各狀態的數量
+        $statusCountQueryBuilder = DB::table('issues');
+        //套用Filter Pattern
+        $statusCountQueryBuilder = $this->filterPatternService->applyToQueryBuilder($statusCountQueryBuilder);
+        $statusCountResults = $statusCountQueryBuilder->groupBy('status_id')
+            ->select('status_id', DB::raw('count(*) as count'))->get();
+        $statusCount = [];
+        foreach ($statusCountResults as $statusCountResult) {
+            $statusCount[$statusCountResult->status_id] = $statusCountResult->count;
+        }
+
         //參與者（僅顯示有參與過的使用者）
         $participants = User::has('comments', '>', 0)->get();
         //標籤
         $labels = Label::all();
 
-        return view('issue.index', compact('issues', 'participants', 'labels', 'filterPattern'));
+        return view('issue.index', compact('issues', 'participants', 'labels', 'filterPattern', 'statusCount'));
     }
 
     /**
