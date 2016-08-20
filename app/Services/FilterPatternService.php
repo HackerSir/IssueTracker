@@ -19,7 +19,6 @@ class FilterPatternService
 
         //暫存至Session
         session(['filterPattern' => $pattern]);
-
     }
 
     /**
@@ -42,7 +41,7 @@ class FilterPatternService
      */
     public function applyToQueryBuilder($queryBuilder)
     {
-        /** @var Builder $queryBuilder */
+        /* @var Builder $queryBuilder */
         //取出pattern
         $pattern = session('filterPattern');
 
