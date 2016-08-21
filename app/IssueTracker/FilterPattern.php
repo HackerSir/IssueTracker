@@ -100,11 +100,7 @@ class FilterPattern
         //排序（若非指定asc，即為desc）
         $this->data['desc'] = ($sc != 'asc');
         //更新pattern
-        if (str_contains($this->pattern, 'sort:')) {
-            $this->pattern = preg_replace("/(?<=sort:)([^\s]*)/", $argument, $this->pattern);
-        } else {
-            $this->pattern .= ' sort:' . $argument;
-        }
+        $this->updatePattern('sort', $argument);
     }
 
     /**
@@ -115,6 +111,21 @@ class FilterPattern
     private function getPattern()
     {
         return $this->pattern;
+    }
+
+    /**
+     * 更新Pattern
+     *
+     * @param $key
+     * @param $argument
+     */
+    private function updatePattern($key, $argument)
+    {
+        //移除舊的
+        $pattern = "/{$key}:([^\s]+)/";
+        $this->pattern = preg_replace($pattern, '', $this->pattern);
+        //加上新的
+        $this->pattern = trim($this->pattern) . ' ' . $key . ':' . $argument;
     }
 
     /**
