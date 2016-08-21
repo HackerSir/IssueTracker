@@ -5,6 +5,7 @@ namespace App\Services;
 use App\IssueTracker\FilterPattern;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use IssueTracker\Status;
 
 class FilterPatternService
 {
@@ -72,6 +73,26 @@ class FilterPatternService
         $pattern = $this->getPattern();
         $patternData = $pattern->data;
         // TODO: 根據Pattern資料修改QueryBuilder
+        //狀態
+        if (isset($patternData['is'])) {
+            //指定狀態
+            $is = $patternData['is'];
+            //取出所有狀態與其ID
+            $statusList = Status::pluck('name', 'id');
+            $statusId = null;
+            //找出指定狀態的ID
+            //（因狀態大寫開頭、參數全小寫，因此需要逐一忽略大小寫比較）
+            foreach ($statusList as $checkStatusId => $checkStatusName) {
+                //逐一檢查
+                if (strcasecmp($is, $checkStatusName) == 0) {
+                    $statusId = $checkStatusId;
+                    break;
+                }
+            }
+            if ($statusId) {
+                $queryBuilder->where('status_id', $statusId);
+            }
+        }
         //排序
         if (isset($patternData['sort']) && isset($patternData['desc'])) {
             $sort = $patternData['sort'];

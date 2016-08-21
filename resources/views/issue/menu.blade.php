@@ -1,11 +1,13 @@
 <div class="ui secondary menu" style="margin: 0;">
     {{-- 狀態清單 --}}
     @foreach(\IssueTracker\Status::all() as $status)
-        <a href="javascript:void(0)" class="item">
-            {!! $status->icon !!}
-            {{-- 顯示根據 Filter Pattern 過濾後的數量 --}}
-            {{ $statusCount[$status->id] or '0' }}
-            {{ $status->name }}
+        <a href="{{ route('issue.index', ['update', 'is' => strtolower($status->name)]) }}" class="item">
+            <span @if($filterPattern->data['is'] == strtolower($status->name))style=" font-weight: bold;" @endif>
+                {!! $status->icon !!}
+                {{-- 顯示根據 Filter Pattern 過濾後的數量 --}}
+                {{ $statusCount[$status->id] or '0' }}
+                {{ $status->name }}
+            </span>
         </a>
     @endforeach
     {{-- 把剩下的東西推到右邊 --}}

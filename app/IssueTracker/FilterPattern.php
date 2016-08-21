@@ -2,6 +2,8 @@
 
 namespace App\IssueTracker;
 
+use IssueTracker\Status;
+
 /**
  * Class FilterPattern
  *
@@ -15,13 +17,14 @@ class FilterPattern
     protected $pattern = '';
     /* @var array 資料，以陣列儲存各種條件 */
     protected $data = [
+        'is'      => null,
         'keyword' => [],
         'sort'    => 'created',
         'desc'    => true,
     ];
 
     /* @var array 有效pattern token類型 */
-    protected static $validTokenTypes = ['sort:'];
+    protected static $validTokenTypes = ['is:', 'sort:'];
     /* @var array 有效排序類型 */
     protected static $validSortTypes = ['created'];
 
@@ -55,9 +58,14 @@ class FilterPattern
                     //特殊token
                     //TODO: 根據類型處理
                     switch ($type) {
+                        case 'is':
+                            //狀態
+                            $this->updateStatus($argument);
+                            break;
                         case 'sort':
                             //排序
                             $this->updateSort($argument);
+                            break;
                     }
                 } else {
                     //非特殊token，即為關鍵字
@@ -76,9 +84,14 @@ class FilterPattern
         foreach ($data as $key => $argument) {
             $key = strtolower($key);
             switch ($key) {
+                case 'is':
+                    //狀態
+                    $this->updateStatus($argument);
+                    break;
                 case 'sort':
                     //排序
                     $this->updateSort($argument);
+                    break;
             }
         }
     }
@@ -103,6 +116,21 @@ class FilterPattern
         $this->updatePattern('sort', $argument);
     }
 
+    private function updateStatus($argument)
+    {
+        $statuses = Status::pluck('name')->toArray();
+        $statuses = array_map('strtolower', $statuses);
+        $argument = strtolower($argument);
+        //狀態
+        if (in_array($argument, $statuses)) {
+            $this->data['is'] = $argument;
+        } else {
+            $this->data['is'] = null;
+        }
+        //更新pattern
+        $this->updatePattern('is', $argument);
+    }
+
     /**
      * 產生Pattern字串
      *
@@ -122,10 +150,11 @@ class FilterPattern
     private function updatePattern($key, $argument)
     {
         //移除舊的
-        $keyPattern = "/{$key}:([^\s]+)/";
-        $this->pattern = preg_replace($keyPattern, '', $this->pattern);
+        $this->pattern = preg_replace("/{$key}:([^\s]+)/", '', $this->pattern);
         //加上新的
         $this->pattern = trim($this->pattern) . ' ' . $key . ':' . $argument;
+        //清除頭尾空格
+        $this->pattern = trim($this->pattern);
     }
 
     /**
