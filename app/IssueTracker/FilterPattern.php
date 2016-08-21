@@ -122,8 +122,8 @@ class FilterPattern
     private function updatePattern($key, $argument)
     {
         //移除舊的
-        $pattern = "/{$key}:([^\s]+)/";
-        $this->pattern = preg_replace($pattern, '', $this->pattern);
+        $keyPattern = "/{$key}:([^\s]+)/";
+        $this->pattern = preg_replace($keyPattern, '', $this->pattern);
         //加上新的
         $this->pattern = trim($this->pattern) . ' ' . $key . ':' . $argument;
     }
