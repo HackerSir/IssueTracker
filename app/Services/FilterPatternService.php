@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\IssueTracker\FilterPattern;
+use DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use IssueTracker\Status;
@@ -102,6 +103,13 @@ class FilterPatternService
             switch ($sort) {
                 case 'created':
                     $queryBuilder->orderBy('created_at', $desc);
+                    break;
+                case 'comments':
+                    $queryBuilder->join('comments', function ($join) {
+                        $join->on('comments.issue_id', '=', 'issues.id');
+                    })->groupBy('issues.id')
+                        ->select((['issues.*', DB::raw('COUNT(comments.issue_id) as comment_count')]))
+                        ->orderBy('comment_count', $desc);
                     break;
             }
         }

@@ -76,8 +76,23 @@
                     @endif
                     Oldest
                 </a>
-                <a class="item">Most Comment</a>
-                <a class="item">Least Comment</a>
+
+                <a href="{{ route('issue.index', ['update', 'sort' => 'comments-desc']) }}" class="item">
+                    @if($filterPattern->data['sort']=='comments' && $filterPattern->data['desc']==true)
+                        <i class="checkmark icon"></i>
+                    @else
+                        <i class="icon"></i>
+                    @endif
+                    Most Comment
+                </a>
+                <a href="{{ route('issue.index', ['update', 'sort' => 'comments-asc']) }}" class="item">
+                    @if($filterPattern->data['sort']=='comments' && $filterPattern->data['desc']==false)
+                        <i class="checkmark icon"></i>
+                    @else
+                        <i class="icon"></i>
+                    @endif
+                    Least Comment
+                </a>
                 <a class="item">Recently Update</a>
                 <a class="item">Least Recently Update</a>
             </div>
