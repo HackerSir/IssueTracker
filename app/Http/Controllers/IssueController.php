@@ -50,8 +50,9 @@ class IssueController extends Controller
 
         //計算各狀態的數量
         $statusCountQueryBuilder = DB::table('issues');
-        //套用Filter Pattern
-        $statusCountQueryBuilder = $this->filterPatternService->applyToQueryBuilder($statusCountQueryBuilder);
+        //套用Filter Pattern（但忽略指定的狀態）
+        $statusCountQueryBuilder = $this->filterPatternService
+            ->applyToQueryBuilder($statusCountQueryBuilder, ['is' => null]);
         $statusCountResults = $statusCountQueryBuilder->groupBy('status_id')
             ->select('status_id', DB::raw('count(*) as count'))->get();
         $statusCount = [];

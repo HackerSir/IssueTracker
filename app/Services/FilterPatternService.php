@@ -65,13 +65,14 @@ class FilterPatternService
      * 將Pattern套用給queryBuilder
      *
      * @param Builder|\Eloquent $queryBuilder
+     * @param array $extraData 追加合併至$data的暫時性資料（只用於query建立，不會儲存）
      * @return mixed
      */
-    public function applyToQueryBuilder($queryBuilder)
+    public function applyToQueryBuilder($queryBuilder, $extraData = [])
     {
         //取出pattern
         $pattern = $this->getPattern();
-        $patternData = $pattern->data;
+        $patternData = array_merge($pattern->data, $extraData);
         // TODO: 根據Pattern資料修改QueryBuilder
         //狀態
         if (isset($patternData['is'])) {
