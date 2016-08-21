@@ -26,7 +26,7 @@ class FilterPattern
     /* @var array 有效pattern token類型 */
     protected static $validTokenTypes = ['is:', 'sort:'];
     /* @var array 有效排序類型 */
-    protected static $validSortTypes = ['created', 'comments'];
+    protected static $validSortTypes = ['created', 'comments', 'updated'];
 
     /**
      * 根據Pattern字串建立Pattern

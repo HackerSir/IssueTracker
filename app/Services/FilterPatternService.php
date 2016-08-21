@@ -99,7 +99,7 @@ class FilterPatternService
         if (isset($patternData['sort']) && isset($patternData['desc'])) {
             $sort = $patternData['sort'];
             $desc = ((bool) $patternData['desc']) ? 'desc' : 'asc';
-            //TODO: 不同類型的排序
+            //不同類型的排序
             switch ($sort) {
                 case 'created':
                     $queryBuilder->orderBy('created_at', $desc);
@@ -110,6 +110,9 @@ class FilterPatternService
                     })->groupBy('issues.id')
                         ->select((['issues.*', DB::raw('COUNT(comments.issue_id) as comment_count')]))
                         ->orderBy('comment_count', $desc);
+                    break;
+                case 'updated':
+                    $queryBuilder->orderBy('updated_at', $desc);
                     break;
             }
         }

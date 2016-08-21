@@ -76,7 +76,6 @@
                     @endif
                     Oldest
                 </a>
-
                 <a href="{{ route('issue.index', ['update', 'sort' => 'comments-desc']) }}" class="item">
                     @if($filterPattern->data['sort']=='comments' && $filterPattern->data['desc']==true)
                         <i class="checkmark icon"></i>
@@ -93,8 +92,22 @@
                     @endif
                     Least Comment
                 </a>
-                <a class="item">Recently Update</a>
-                <a class="item">Least Recently Update</a>
+                <a href="{{ route('issue.index', ['update', 'sort' => 'updated-desc']) }}" class="item">
+                    @if($filterPattern->data['sort']=='updated' && $filterPattern->data['desc']==true)
+                        <i class="checkmark icon"></i>
+                    @else
+                        <i class="icon"></i>
+                    @endif
+                    Recently Update
+                </a>
+                <a href="{{ route('issue.index', ['update', 'sort' => 'updated-asc']) }}" class="item">
+                    @if($filterPattern->data['sort']=='updated' && $filterPattern->data['desc']==false)
+                        <i class="checkmark icon"></i>
+                    @else
+                        <i class="icon"></i>
+                    @endif
+                    Least Recently Update
+                </a>
             </div>
         </div>
     </div>
